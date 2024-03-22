@@ -13,30 +13,35 @@ class MainViewController: UIViewController {
     
     private(set) var currentLocation: CLLocationCoordinate2D?
     
+    //MARK: Child View Controllers variables
+    private let cityWeatherVC = CityWeatherViewController()
+    private let noUserVC = NoUserLocationViewController()
+    
+    
+    //MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         locationManager.delegate = self
         checkLocationAuthorization()
     }
-
-    let cityWeatherVC = CityWeatherViewController()
-    let noUserVC = NoUserLocationViewController()
-    func showCityWeatherVC() {
+    
+    
+    //MARK: show childVC functions
+    private func showCityWeatherVC() {
         self.addChildVC(cityWeatherVC, frame: view.frame)
         createNavBarHamburgerButton(with: nil)
         createNavBarTitle(for: "View")
         noUserVC.removeChildVC()
     }
     
-    func showNoUserLocationPermissionVC() {
+    private func showNoUserLocationPermissionVC() {
         self.addChildVC(noUserVC, frame: view.frame)
         navigationItem.titleView = nil
         navigationItem.leftBarButtonItem = nil
         cityWeatherVC.removeChildVC()
     }
 
-    
     private func checkLocationAuthorization() {
         
         switch locationManager.authorizationStatus {
