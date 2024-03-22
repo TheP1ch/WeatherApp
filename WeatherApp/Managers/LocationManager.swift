@@ -9,42 +9,42 @@ import Foundation
 import CoreLocation
 
 protocol LocationManagerProtocol{
-    func checkIfLocationServicesIsEnabled() -> ()
+    var currentLocation: CLLocationCoordinate2D? {get}
+    func checkLocationAuthorization() -> Bool
 }
 
 final class LocationManager: NSObject, LocationManagerProtocol {
+    
+    //MARK: Variables
     private var locationManager: CLLocationManager = CLLocationManager()
     
+    private(set) var currentLocation: CLLocationCoordinate2D?
     
     
-    func checkIfLocationServicesIsEnabled() {
-        
-        DispatchQueue.global().async {
-            if CLLocationManager.locationServicesEnabled() {
-                self.locationManager.delegate = self
-                self.checkLocationAuthorization()
-            }else {
-                print("allow location")
-            }
-        }
+    
+    //MARK: Methods
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
     }
     
-    private func checkLocationAuthorization() {
+    @discardableResult func checkLocationAuthorization() -> Bool {
         
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("your location is restricted")
-        case .denied:
-            print("you have denied")
+        case .restricted, .denied:
+            print("denied")
         case .authorizedAlways, .authorizedWhenInUse:
-            print("you have")
+            print("it's okay")
             locationManager.startUpdatingLocation()
+            return true
         @unknown default:
             break
         }
+        
+        return false
     }
 
 }
@@ -55,9 +55,9 @@ extension LocationManager: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("delegasion")
-        if locations.first != nil {
-            print(locations)
+        if let location = locations.first {
+            manager.stopUpdatingLocation()
+            currentLocation = location.coordinate
         }
     }
 }

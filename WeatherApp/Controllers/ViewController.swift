@@ -7,25 +7,27 @@
 
 import UIKit
 
+/// <#Description#>
 class ViewController: UIViewController {
+    
+    //MARK: Variables
+//    let locationManager: LocationManagerProtocol
+    
 
+    //MARK: Life Cycle Hooks
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
-        
+        createNavBarTitle(for: "View")
     }
-    
-    let locationManager: LocationManagerProtocol = LocationManager()
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        locationManager.checkIfLocationServicesIsEnabled()
+        print("appear")
     }
 
-
+    //MARK: Methods
 }
 
