@@ -11,7 +11,6 @@
 		9CA36E0D2BADC22E00ABB3AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E0C2BADC22E00ABB3AD /* SceneDelegate.swift */; };
 		9CA36E142BADC22F00ABB3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CA36E132BADC22F00ABB3AD /* Assets.xcassets */; };
 		9CA36E172BADC22F00ABB3AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CA36E152BADC22F00ABB3AD /* LaunchScreen.storyboard */; };
-		9CA36E252BADC3BF00ABB3AD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E242BADC3BF00ABB3AD /* LocationManager.swift */; };
 		9CA36E292BAE052B00ABB3AD /* NoUserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E282BAE052B00ABB3AD /* NoUserLocationViewController.swift */; };
 		9CA36E2B2BAE11E600ABB3AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E2A2BAE11E600ABB3AD /* MainViewController.swift */; };
 		9CA36E2D2BAE2A7000ABB3AD /* AppGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E2C2BAE2A6F00ABB3AD /* AppGraph.swift */; };
@@ -26,7 +25,6 @@
 		9CA36E132BADC22F00ABB3AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CA36E162BADC22F00ABB3AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CA36E182BADC22F00ABB3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CA36E242BADC3BF00ABB3AD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9CA36E282BAE052B00ABB3AD /* NoUserLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoUserLocationViewController.swift; sourceTree = "<group>"; };
 		9CA36E2A2BAE11E600ABB3AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9CA36E2C2BAE2A6F00ABB3AD /* AppGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGraph.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 		9CA36E232BADC3A400ABB3AD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				9CA36E242BADC3BF00ABB3AD /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 				9CA36E2B2BAE11E600ABB3AD /* MainViewController.swift in Sources */,
 				9CA36E312BAE44B100ABB3AD /* CityWeatherViewController.swift in Sources */,
 				9CA36E292BAE052B00ABB3AD /* NoUserLocationViewController.swift in Sources */,
-				9CA36E252BADC3BF00ABB3AD /* LocationManager.swift in Sources */,
 				9CA36E0B2BADC22E00ABB3AD /* AppDelegate.swift in Sources */,
 				9CA36E2D2BAE2A7000ABB3AD /* AppGraph.swift in Sources */,
 				9CA36E0D2BADC22E00ABB3AD /* SceneDelegate.swift in Sources */,
