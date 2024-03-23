@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let rootVc = UINavigationController(rootViewController: MainViewController())
+        let rootVc = UINavigationController(rootViewController: MainViewController(locationManager: appGraph.locationManager))
         window.rootViewController = rootVc
         window.makeKeyAndVisible()
 //        compositionRoot.configurateNavigationControllerBar()
@@ -52,6 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

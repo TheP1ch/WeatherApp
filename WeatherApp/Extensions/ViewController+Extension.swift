@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 extension UIViewController{
-    func createNavBarHamburgerButton(with action: UIAction?) {
+    func createNavBarHamburgerButton(withAction action: UIAction?) {
         
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
@@ -23,7 +24,7 @@ extension UIViewController{
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
     }
     
-    func createNavBarTitle(for title: String) {
+    private func createNavBarTitle(for title: String) {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -45,5 +46,37 @@ extension UIViewController{
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
+    }
+    
+    func setCityNameToNavBarTitle(by location: CLLocation) {
+        let geoCoder = CLGeocoder()
+        Task{
+            do{
+                let placemarks = try await geoCoder.reverseGeocodeLocation(location)
+                guard let placemark = placemarks.first else {return}
+                createNavBarTitle(for: "\(placemark.locality ?? "view")")
+//                print("country\n")
+//                print(placemark.country)
+//
+//                print("administrativeArea\n")
+//                print(placemark.administrativeArea)
+//
+//                print("areasOfInterest")
+//                print(placemark.areasOfInterest)
+//
+//                print("locality(city)")
+//                print(placemark.locality)
+//
+//                print("region")
+//                print(placemark.region)
+//
+//                print("subAdministrativeArea")
+//                print(placemark.subAdministrativeArea)
+                
+                
+            } catch{
+                print(error.localizedDescription)
+            }
+        }
     }
 }

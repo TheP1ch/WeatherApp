@@ -6,24 +6,22 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CityWeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("CITY Weather")
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        
+        createNavBarHamburgerButton(withAction: nil)
+//        createNavBarTitle(for: "View")
+//        geoCode()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func showLocation(location: Coordinates){
+//        geoCode(location: location)
+        print("City weather", location)
     }
-    */
 
 }
