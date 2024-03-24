@@ -16,6 +16,7 @@ struct CurrentForecast: Codable{
     let temperature: Double
     let apparentTemperature: Double
     let windSpeed: Double
+    let windBearing: Double
 }
 
 struct DailyForecast: Codable{
@@ -27,6 +28,7 @@ struct DailyForecast: Codable{
     let temperatureMin: Double
     let temperatureMax: Double
     let windSpeed: Double
+    let windBearing: Double
 }
 
 struct HourlyForecast: Codable{
@@ -43,5 +45,9 @@ struct WeatherForecast: Codable {
     let daily: WeekForecast
 }
 
-
+enum WeatherForecastDataSourceModel {
+    case current(CurrentForecast)
+    case hourly([CurrentForecast])
+    case daily([DailyForecast])
+}
 

@@ -29,9 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 apiManager: appGraph.apiManager
             )
         )
+        
         window.rootViewController = rootVc
         window.makeKeyAndVisible()
-//        compositionRoot.configurateNavigationControllerBar()
         
         
         self.window = window
