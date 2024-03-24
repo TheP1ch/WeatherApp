@@ -9,13 +9,17 @@ import UIKit
 
 class MainViewController: UIViewController {
    
-    private var locationManager: LocationManagerWithCompletionBlockProtocol
+    private let locationManager: LocationManagerWithCompletionBlockProtocol
+    private let apiManager: ApiManager
     
-    private let cityWeatherChildVC: CityWeatherViewController = CityWeatherViewController()
+    private let cityWeatherChildVC: CityWeatherViewController
     
     //MARK: Initializers
-    init(locationManager: LocationManagerWithCompletionBlockProtocol){
+    init(locationManager: LocationManagerWithCompletionBlockProtocol, apiManager: ApiManager){
         self.locationManager = locationManager
+        self.apiManager = apiManager
+        cityWeatherChildVC = CityWeatherViewController(apiManager: self.apiManager)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,15 +39,14 @@ class MainViewController: UIViewController {
             guard let self else {return}
             DispatchQueue.main.async{
                 if !isDenyAccess{
-                    let location = self.locationManager.currentLocation ?? londonLocation.toCLLocation()
+                    let location = self.locationManager.currentLocation ?? Coordinates.londonCoordinates.toCLLocation()
                     self.setCityNameToNavBarTitle(by: location)
-                    
                     self.cityWeatherChildVC.showLocation(
                         location: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                     )
                 } else {
-                    self.setCityNameToNavBarTitle(by: londonLocation.toCLLocation())
-                    self.cityWeatherChildVC.showLocation(location: londonLocation)
+                    self.setCityNameToNavBarTitle(by: Coordinates.londonCoordinates.toCLLocation())
+                    self.cityWeatherChildVC.showLocation(location: Coordinates.londonCoordinates)
                 }
             }
         }

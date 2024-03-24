@@ -25,12 +25,13 @@ extension UIViewController{
     }
     
     private func createNavBarTitle(for title: String) {
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        titleLabel.textColor = .red
+//        let titleLabel = UILabel()
+//        titleLabel.text = title
+//        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+//        titleLabel.tintColor = .red
         
-        self.navigationItem.titleView = titleLabel
+        self.navigationItem.title = title
+//        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red, .font: UIFont.systemFont(ofSize: 16, weight: .bold)]
     }
     
     func addChildVC(_ child: UIViewController, frame: CGRect?){

@@ -13,7 +13,7 @@ protocol LocationManagerProtocol{
     var currentLocation: CLLocation? {get}
 }
 
-protocol LocationManagerWithCompletionBlockProtocol: LocationManagerProtocol{
+protocol LocationManagerWithCompletionBlockProtocol: LocationManagerProtocol, AnyObject{
     var locationChangeCompletion: ((Bool) -> ()) { get set }
 }
 

@@ -8,6 +8,6 @@
 import Foundation
 
 final class AppGraph{
-//    let apiManager: ApiManager = ApiManager()
+    let apiManager: ApiManager = ApiManager()
     let locationManager: LocationManager = LocationManager()
 }

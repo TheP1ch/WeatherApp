@@ -23,7 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let rootVc = UINavigationController(rootViewController: MainViewController(locationManager: appGraph.locationManager))
+        let rootVc = UINavigationController(
+            rootViewController: MainViewController(
+                locationManager: appGraph.locationManager,
+                apiManager: appGraph.apiManager
+            )
+        )
         window.rootViewController = rootVc
         window.makeKeyAndVisible()
 //        compositionRoot.configurateNavigationControllerBar()
