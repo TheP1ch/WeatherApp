@@ -8,9 +8,10 @@
 import UIKit
 import CoreLocation
 
+fileprivate var containerView: UIView!
+
 extension UIViewController{
     func createNavBarHamburgerButton(withAction action: UIAction?) {
-        
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.setImage(UIImage(named: "hamburger_icon")!.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
@@ -25,13 +26,7 @@ extension UIViewController{
     }
     
     private func createNavBarTitle(for title: String) {
-//        let titleLabel = UILabel()
-//        titleLabel.text = title
-//        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-//        titleLabel.tintColor = .red
-        
         self.navigationItem.title = title
-//        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red, .font: UIFont.systemFont(ofSize: 16, weight: .bold)]
     }
     
     func addChildVC(_ child: UIViewController, frame: CGRect?){
@@ -56,28 +51,36 @@ extension UIViewController{
                 let placemarks = try await geoCoder.reverseGeocodeLocation(location)
                 guard let placemark = placemarks.first else {return}
                 createNavBarTitle(for: "\(placemark.locality ?? "view")")
-//                print("country\n")
-//                print(placemark.country)
-//
-//                print("administrativeArea\n")
-//                print(placemark.administrativeArea)
-//
-//                print("areasOfInterest")
-//                print(placemark.areasOfInterest)
-//
-//                print("locality(city)")
-//                print(placemark.locality)
-//
-//                print("region")
-//                print(placemark.region)
-//
-//                print("subAdministrativeArea")
-//                print(placemark.subAdministrativeArea)
-                
-                
             } catch{
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func showLoadingView(){
+        containerView = UIView(frame: view.bounds)
+        view.addSubview(containerView)
+        
+        containerView.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
+        containerView.alpha = 0
+        
+        UIView.animate(withDuration: 0.25){
+            containerView.alpha = 0.8
+        }
+        
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+        ])
+        
+        activityIndicator.startAnimating()
+    }
+    
+    func dismissLoadingView() {
+        containerView.removeFromSuperview()
+        containerView = nil
     }
 }
