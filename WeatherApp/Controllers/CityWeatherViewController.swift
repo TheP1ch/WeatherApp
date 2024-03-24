@@ -8,7 +8,13 @@
 import UIKit
 import CoreLocation
 
+protocol ReloadDataProtocol{
+    func reloadData() -> ()
+}
+
 class CityWeatherViewController: UIViewController {
+    
+    private var cityCoordinates: Coordinates = Coordinates.londonCoordinates
     
     //MARK: View Elements
     private let primaryView: CurrentWeatherView = CurrentWeatherView()
@@ -30,15 +36,22 @@ class CityWeatherViewController: UIViewController {
     //MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        view.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
         configurePrimaryView()
     }
     
-    func showLocation(location: Coordinates){
+    func showForecast(for location: Coordinates){
+        self.showLoadingView()
         Task{
             do{
+                cityCoordinates = location
                 let weatherForecast = try await apiManager.obtainWeatherForecast(for: location)
-                self.primaryView.configure(weatherForecast: weatherForecast)
+                self.primaryView.configure(weatherForecastData: [
+                    .current(weatherForecast.currently),
+                    .hourly(weatherForecast.hourly.data),
+                    .daily(weatherForecast.daily.data)
+                ])
+                self.dismissLoadingView()
             }
             catch{
                 print(error.localizedDescription)
@@ -51,10 +64,16 @@ class CityWeatherViewController: UIViewController {
         view.addSubview(primaryView)
         
         NSLayoutConstraint.activate([
-            primaryView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            primaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            primaryView.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             primaryView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             primaryView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+    }
+}
+
+extension CityWeatherViewController: ReloadDataProtocol{
+    func reloadData() {
+        self.showForecast(for: cityCoordinates)
     }
 }

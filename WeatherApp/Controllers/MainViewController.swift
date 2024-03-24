@@ -41,12 +41,12 @@ class MainViewController: UIViewController {
                 if !isDenyAccess{
                     let location = self.locationManager.currentLocation ?? Coordinates.londonCoordinates.toCLLocation()
                     self.setCityNameToNavBarTitle(by: location)
-                    self.cityWeatherChildVC.showLocation(
-                        location: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    self.cityWeatherChildVC.showForecast(
+                        for: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                     )
                 } else {
                     self.setCityNameToNavBarTitle(by: Coordinates.londonCoordinates.toCLLocation())
-                    self.cityWeatherChildVC.showLocation(location: Coordinates.londonCoordinates)
+                    self.cityWeatherChildVC.showForecast(for: Coordinates.londonCoordinates)
                 }
             }
         }
