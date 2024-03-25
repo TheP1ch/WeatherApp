@@ -31,7 +31,7 @@ class HourlyWeatherCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         
         contentView.layer.shadowColor = UIColor.gray.cgColor
-        contentView.layer.shadowOpacity = 0.45
+        contentView.layer.shadowOpacity = 0.7
         contentView.layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
         contentView.layer.shadowRadius = 7
         contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 15).cgPath

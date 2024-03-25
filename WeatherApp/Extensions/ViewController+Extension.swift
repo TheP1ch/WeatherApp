@@ -15,7 +15,10 @@ extension UIViewController{
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.setImage(UIImage(named: "hamburger_icon")!.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        button.addAction(UIAction{_ in print("im work")}, for: .touchUpInside)
+        
+        if let action = action {
+            button.addAction(action, for: .touchUpInside)
+        }
         
         let leftBarButtonItem = UIBarButtonItem(customView: button)
         leftBarButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false

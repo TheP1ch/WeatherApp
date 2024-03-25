@@ -41,6 +41,7 @@ class CityWeatherViewController: UIViewController {
     //MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         configurePrimaryView()
     }
     
@@ -62,6 +63,7 @@ class CityWeatherViewController: UIViewController {
             }
             catch{
                 print(error)
+                //TODO: NOTification COmponent dobavit
                 self.dismissLoadingView()
             }
         }

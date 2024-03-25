@@ -31,17 +31,20 @@ class MainViewController: UIViewController {
     //MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+//        view.backgroundColor = .whitex
         self.addChildVC(cityWeatherChildVC, frame: view.frame)
-        createNavBarHamburgerButton(withAction: nil)
+        createNavBarHamburgerButton(withAction: openSearchTownController)
+        navigationItem.backButtonDisplayMode = .minimal
         
         locationManager.locationChangeCompletion = {[weak self] isDenyAccess in
             guard let self else {return}
+            
             if !isDenyAccess{
                 let location = self.locationManager.currentLocation ?? Coordinates.londonCoordinates.toCLLocation()
                 self.setCityNameToNavBarTitle(by: location)
                 self.cityWeatherChildVC.showForecast(
-                    for: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    for: Coordinates(latitude: location.coordinate.latitude,
+                                     longitude: location.coordinate.longitude)
                 )
             } else {
                 self.setCityNameToNavBarTitle(by: Coordinates.londonCoordinates.toCLLocation())
@@ -49,6 +52,14 @@ class MainViewController: UIViewController {
             }
         }
         locationManager.checkLocationAuthorization()
+    }
+    
+    private lazy var openSearchTownController: UIAction = UIAction {[weak self] _ in
+        guard let self else {return}
+        
+        let vc = SearchTownViewController(apiManager: apiManager)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

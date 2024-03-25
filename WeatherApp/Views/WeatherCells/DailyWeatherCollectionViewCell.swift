@@ -33,11 +33,11 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
         contentView.layer.cornerRadius = 10
         
-        contentView.layer.shadowColor = UIColor.white.cgColor
+        contentView.layer.shadowColor = UIColor.gray.cgColor
         contentView.layer.shadowOpacity = 0.6
         contentView.layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
-        contentView.layer.shadowRadius = 5
-        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 15).cgPath
+        contentView.layer.shadowRadius = 4
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 10).cgPath
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = UIScreen.main.scale
         

@@ -65,8 +65,7 @@ class CurrentWeatherView: UIView {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-        //TODO: RELOAD DATA Functional add delegate ...
-//        collectionView.r
+
         collectionView.refreshControl = refreshControl
         
         self.collectionView = collectionView
