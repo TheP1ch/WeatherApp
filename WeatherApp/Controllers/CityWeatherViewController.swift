@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-protocol ReloadDataProtocol{
+protocol ReloadDataProtocol: AnyObject{
     func reloadData() -> ()
 }
 
@@ -17,7 +17,12 @@ class CityWeatherViewController: UIViewController {
     private var cityCoordinates: Coordinates = Coordinates.londonCoordinates
     
     //MARK: View Elements
-    private let primaryView: CurrentWeatherView = CurrentWeatherView()
+    private lazy var primaryView: CurrentWeatherView = {
+        let view = CurrentWeatherView()
+        view.delegate = self
+        
+        return view
+    }()
     
     //MARK: Dependencies
     private let apiManager: ApiManager
@@ -36,25 +41,28 @@ class CityWeatherViewController: UIViewController {
     //MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
         configurePrimaryView()
     }
     
     func showForecast(for location: Coordinates){
-        self.showLoadingView()
         Task{
             do{
+                self.showLoadingView()
                 cityCoordinates = location
+                
                 let weatherForecast = try await apiManager.obtainWeatherForecast(for: location)
+                
                 self.primaryView.configure(weatherForecastData: [
                     .current(weatherForecast.currently),
                     .hourly(weatherForecast.hourly.data),
                     .daily(weatherForecast.daily.data)
                 ])
+                
                 self.dismissLoadingView()
             }
             catch{
-                print(error.localizedDescription)
+                print(error)
+                self.dismissLoadingView()
             }
         }
     }
@@ -74,6 +82,8 @@ class CityWeatherViewController: UIViewController {
 
 extension CityWeatherViewController: ReloadDataProtocol{
     func reloadData() {
+        print(cityCoordinates)
         self.showForecast(for: cityCoordinates)
+        
     }
 }

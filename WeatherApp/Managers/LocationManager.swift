@@ -54,9 +54,18 @@ extension LocationManager: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        print("\nsetLocation")
         if let location = locations.first {
-            currentLocation = location
-            locationChangeCompletion(false)
-//            print("wasSet", location)
+//            print(location)
+            Task{
+                do{
+                    if(try await !location.compareByTown(with: currentLocation)){
+                        currentLocation = location
+                        locationChangeCompletion(false)
+                    }
+                } catch {
+                    currentLocation = location
+                    locationChangeCompletion(false)
+                }
+            }
         }
     }
 }

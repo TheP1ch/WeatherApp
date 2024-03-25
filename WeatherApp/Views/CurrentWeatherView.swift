@@ -11,9 +11,19 @@ class CurrentWeatherView: UIView {
     
     private var weatherForecastData: [WeatherForecastDataSourceModel] = []
     
-    //MARK: View Elements
+    weak var delegate: ReloadDataProtocol?
+    
+    //MARK: View UIElements
+    
     
     private var collectionView: UICollectionView?
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl(frame: .zero, primaryAction: refreshAction)
+        refreshControl.tintColor = .gray
+        
+        return refreshControl
+    }()
 
     //MARK: -initializers
     override init(frame: CGRect) {
@@ -57,6 +67,7 @@ class CurrentWeatherView: UIView {
         ])
         //TODO: RELOAD DATA Functional add delegate ...
 //        collectionView.r
+        collectionView.refreshControl = refreshControl
         
         self.collectionView = collectionView
     }
@@ -81,27 +92,39 @@ class CurrentWeatherView: UIView {
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(1.0)))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-                widthDimension: .fractionalWidth(0.9),
+                widthDimension: .fractionalWidth(0.2),
                 heightDimension: .fractionalWidth(0.3)), subitems: [item])
             
             group.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 40, trailing: 0)
-            section.orthogonalScrollingBehavior = .groupPagingCentered
-        
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 40, trailing: 20)
+            section.orthogonalScrollingBehavior = .continuous
             return section
+            
         case .daily:
             let item = NSCollectionLayoutItem(layoutSize: .init(
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(1.0)))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(75)), subitems: [item])
+                heightDimension: .absolute(60)), subitems: [item])
             
             group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
             return NSCollectionLayoutSection(group: group)
         }
+    }
+    
+    //MARK: Refresh control Action
+    
+    private lazy var refreshAction: UIAction = UIAction{ [weak self] _ in
+        defer{
+            self?.refreshControl.endRefreshing()
+        }
+        guard let self, let delegate = delegate else {return}
+        
+        delegate.reloadData()
+        
     }
 }
 

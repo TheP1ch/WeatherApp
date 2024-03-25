@@ -11,12 +11,12 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "CurrentWeatherCollectionViewCell"
     
 //    MARK: Cell view elements
-    private let temperatureLabel: UILabel = UILabel.createLabel(fontSize: 60, fontWeight: .bold, textColor: .black, textAlignment: .center)
+    private let temperatureLabel: UILabel = UILabel(fontSize: 60, fontWeight: .bold, textColor: .black, textAlignment: .center)
     
     private let weatherIcon: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.contentMode = .scaleAspectFit
+//        imgView.contentMode = .scaleAspectFit
         
         return imgView
     }()
@@ -30,9 +30,9 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    private let summaryLabel: UILabel = UILabel.createLabel(fontSize: 18, fontWeight: .regular, textColor: .black, textAlignment: .center)
+    private let summaryLabel: UILabel = UILabel(fontSize: 18, fontWeight: .regular, textColor: .black, textAlignment: .center)
     
-    private let feelsLikeLabel: UILabel = UILabel.createLabel(fontSize: 18, fontWeight: .regular, textColor: .black, textAlignment: .center)
+    private let feelsLikeLabel: UILabel = UILabel(fontSize: 18, fontWeight: .regular, textColor: .black, textAlignment: .center)
     
     private lazy var weatherDescriptionStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [windStackView, pressureStackView, humidityStackView])
@@ -44,8 +44,8 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    private let humidityLabel: UILabel = UILabel.createLabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
-    private let humidityIcon: UIImageView = UIImageView.createImageViewSystemIcon(for: "drop", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
+    private let humidityLabel: UILabel = UILabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
+    private let humidityIcon: UIImageView = UIImageView(iconName: "drop", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
     
     private lazy var humidityStackView: UIStackView =  {
         let stack = UIStackView(arrangedSubviews: [humidityIcon, humidityLabel])
@@ -56,8 +56,8 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    private let windSpeedLabel: UILabel = UILabel.createLabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
-    private let windIcon: UIImageView = UIImageView.createImageViewSystemIcon(for: "wind", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
+    private let windSpeedLabel: UILabel = UILabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
+    private let windIcon: UIImageView = UIImageView(iconName: "wind", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
     
     private lazy var windStackView: UIStackView =  {
         let stack = UIStackView(arrangedSubviews: [windIcon, windSpeedLabel])
@@ -68,8 +68,8 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    private let pressureLabel: UILabel = UILabel.createLabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
-    private let pressureIcon: UIImageView = UIImageView.createImageViewSystemIcon(for: "barometer", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
+    private let pressureLabel: UILabel = UILabel(fontSize: 16, fontWeight: .regular, textColor: .black, textAlignment: .center)
+    private let pressureIcon: UIImageView = UIImageView(iconName: "barometer", ofSize: 20, renderingMode: .automatic, tintColor: .gray)
     
     private lazy var pressureStackView: UIStackView =  {
         let stack = UIStackView(arrangedSubviews: [pressureIcon, pressureLabel])
@@ -92,7 +92,7 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: Cell constraints
-    func configureConstraints() {
+    private func configureConstraints() {
         [temperatureIconStack, summaryLabel, feelsLikeLabel, weatherDescriptionStack].forEach{
             contentView.addSubview($0)
         }
@@ -127,9 +127,9 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     
     //MARK: Cell configure
     func configure(with data: CurrentForecast) {
-        let weatherIconConfig = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 60))
-        weatherIcon.image = UIImage(systemName: IconApiDictionary[data.icon]!.rawValue, withConfiguration: weatherIconConfig)?.withRenderingMode(.alwaysOriginal)
-        temperatureLabel.text = "\(data.temperature.toIntUp())°"
+        weatherIcon.image = UIImage(systemName: IconApiDictionary[data.icon]!.rawValue, ofSize: 60)?.withRenderingMode(.alwaysOriginal)
+        
+        temperatureLabel.text = "\(data.temperature > 0 ? "+" : "")\(data.temperature.toIntUp())°"
         summaryLabel.text = data.summary
         feelsLikeLabel.text =  "Fells like \(data.apparentTemperature.toIntUp())°"
         

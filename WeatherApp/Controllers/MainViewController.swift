@@ -37,17 +37,15 @@ class MainViewController: UIViewController {
         
         locationManager.locationChangeCompletion = {[weak self] isDenyAccess in
             guard let self else {return}
-            DispatchQueue.main.async{
-                if !isDenyAccess{
-                    let location = self.locationManager.currentLocation ?? Coordinates.londonCoordinates.toCLLocation()
-                    self.setCityNameToNavBarTitle(by: location)
-                    self.cityWeatherChildVC.showForecast(
-                        for: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    )
-                } else {
-                    self.setCityNameToNavBarTitle(by: Coordinates.londonCoordinates.toCLLocation())
-                    self.cityWeatherChildVC.showForecast(for: Coordinates.londonCoordinates)
-                }
+            if !isDenyAccess{
+                let location = self.locationManager.currentLocation ?? Coordinates.londonCoordinates.toCLLocation()
+                self.setCityNameToNavBarTitle(by: location)
+                self.cityWeatherChildVC.showForecast(
+                    for: Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                )
+            } else {
+                self.setCityNameToNavBarTitle(by: Coordinates.londonCoordinates.toCLLocation())
+                self.cityWeatherChildVC.showForecast(for: Coordinates.londonCoordinates)
             }
         }
         locationManager.checkLocationAuthorization()

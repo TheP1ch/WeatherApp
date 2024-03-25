@@ -31,8 +31,14 @@ struct DailyForecast: Codable{
     let windBearing: Double
 }
 
-struct HourlyForecast: Codable{
-    let data: [CurrentForecast]
+struct HourlyWeather: Codable {
+    let time: Int
+    let icon: String
+    let temperature: Double
+}
+
+struct DayForecastByHour: Codable{
+    let data: [HourlyWeather]
 }
 
 struct WeekForecast: Codable{
@@ -41,13 +47,13 @@ struct WeekForecast: Codable{
 
 struct WeatherForecast: Codable {
     let currently: CurrentForecast
-    let hourly: HourlyForecast
+    let hourly: DayForecastByHour
     let daily: WeekForecast
 }
 
 enum WeatherForecastDataSourceModel {
     case current(CurrentForecast)
-    case hourly([CurrentForecast])
+    case hourly([HourlyWeather])
     case daily([DailyForecast])
 }
 

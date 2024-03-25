@@ -30,6 +30,10 @@
 		9CA36E3C2BAF151600ABB3AD /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E3B2BAF151600ABB3AD /* Weather.swift */; };
 		9CA36E402BAF282200ABB3AD /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E3F2BAF282200ABB3AD /* Coordinates.swift */; };
 		9CA36E422BAF472900ABB3AD /* Coordinates+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA36E412BAF472900ABB3AD /* Coordinates+Extension.swift */; };
+		9CB621362BB1A4D300B1EAC4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB621352BB1A4D300B1EAC4 /* Date+Extension.swift */; };
+		9CB621392BB1A8F100B1EAC4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB621382BB1A8F100B1EAC4 /* UIImage+Extension.swift */; };
+		9CB6213B2BB1D5D700B1EAC4 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB6213A2BB1D5D700B1EAC4 /* CLLocation+Extension.swift */; };
+		9CB6213D2BB1DF4900B1EAC4 /* SearchTownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB6213C2BB1DF4900B1EAC4 /* SearchTownViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		9CA36E3B2BAF151600ABB3AD /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		9CA36E3F2BAF282200ABB3AD /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		9CA36E412BAF472900ABB3AD /* Coordinates+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinates+Extension.swift"; sourceTree = "<group>"; };
+		9CB621352BB1A4D300B1EAC4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		9CB621382BB1A8F100B1EAC4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		9CB6213A2BB1D5D700B1EAC4 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
+		9CB6213C2BB1DF4900B1EAC4 /* SearchTownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTownViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +138,9 @@
 				9C961FCE2BB09CE200D7C9DB /* UILabel+Extension.swift */,
 				9C961FD02BB0A59200D7C9DB /* Double+Extension.swift */,
 				9C961FD22BB0AEA100D7C9DB /* UIImageView+Extension.swift */,
+				9CB621352BB1A4D300B1EAC4 /* Date+Extension.swift */,
+				9CB621382BB1A8F100B1EAC4 /* UIImage+Extension.swift */,
+				9CB6213A2BB1D5D700B1EAC4 /* CLLocation+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 			children = (
 				9CA36E2A2BAE11E600ABB3AD /* MainViewController.swift */,
 				9CA36E302BAE44B100ABB3AD /* CityWeatherViewController.swift */,
+				9CB6213C2BB1DF4900B1EAC4 /* SearchTownViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -253,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C961FC72BB074A900D7C9DB /* HourlyWeatherCollectionViewCell.swift in Sources */,
+				9CB621362BB1A4D300B1EAC4 /* Date+Extension.swift in Sources */,
 				9CA36E352BAE4A6000ABB3AD /* ApiManager.swift in Sources */,
 				9C961FD12BB0A59200D7C9DB /* Double+Extension.swift in Sources */,
 				9CA36E2F2BAE2C5800ABB3AD /* ViewController+Extension.swift in Sources */,
@@ -260,9 +273,12 @@
 				9C961FBE2BB0351E00D7C9DB /* Constants.swift in Sources */,
 				9CA36E402BAF282200ABB3AD /* Coordinates.swift in Sources */,
 				9CA36E312BAE44B100ABB3AD /* CityWeatherViewController.swift in Sources */,
+				9CB621392BB1A8F100B1EAC4 /* UIImage+Extension.swift in Sources */,
 				9C961FC92BB074BC00D7C9DB /* DailyWeatherCollectionViewCell.swift in Sources */,
+				9CB6213D2BB1DF4900B1EAC4 /* SearchTownViewController.swift in Sources */,
 				9CA36E0B2BADC22E00ABB3AD /* AppDelegate.swift in Sources */,
 				9CA36E3C2BAF151600ABB3AD /* Weather.swift in Sources */,
+				9CB6213B2BB1D5D700B1EAC4 /* CLLocation+Extension.swift in Sources */,
 				9CA36E2D2BAE2A7000ABB3AD /* AppGraph.swift in Sources */,
 				9C961FCF2BB09CE200D7C9DB /* UILabel+Extension.swift in Sources */,
 				9C961FC22BB062AE00D7C9DB /* CityWeatherSection.swift in Sources */,

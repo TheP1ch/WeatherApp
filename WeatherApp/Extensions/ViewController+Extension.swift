@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-fileprivate var containerView: UIView!
+fileprivate var containerView: UIView?
 
 extension UIViewController{
     func createNavBarHamburgerButton(withAction action: UIAction?) {
@@ -59,28 +59,29 @@ extension UIViewController{
     
     func showLoadingView(){
         containerView = UIView(frame: view.bounds)
-        view.addSubview(containerView)
+        view.addSubview(containerView!)
         
-        containerView.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
-        containerView.alpha = 0
+        containerView!.backgroundColor = UIColor(r: 173, g: 216, b: 230, a: 0.8)
+        containerView!.alpha = 0
         
         UIView.animate(withDuration: 0.25){
-            containerView.alpha = 0.8
+            containerView!.alpha = 0.8
         }
         
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        containerView.addSubview(activityIndicator)
+        containerView!.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: containerView!.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: containerView!.centerYAnchor),
         ])
         
         activityIndicator.startAnimating()
     }
     
     func dismissLoadingView() {
-        containerView.removeFromSuperview()
+        if(containerView == nil){return}
+        containerView!.removeFromSuperview()
         containerView = nil
     }
 }
